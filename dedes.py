@@ -118,14 +118,18 @@ r0 = res[32:]
 print(hex(int(l0, 2)), hex(int(r0, 2)))
 print()
 
-r0 = '01000100111011010101101011010100'
+r0 = '01000111110110110010011011010010'
 
 eks = ""
 for i in range(len(expansion)):
     eks += r0[expansion[i] - 1]
 print('eks:', hex(int(eks, 2)))
 
-hasil_sbox = '00100101010110111100010000001010'
+for i in range(0, len(eks), 6):
+    zz = eks[i:i+6]
+    print(i // 6 + 1, zz, int(zz[0] + zz[-1], 2), int(zz[1:-1], 2))
+
+hasil_sbox = '00101110010111100001100110100100'
 permute = [
     16, 7, 20, 21,
     29, 12, 28, 17,
