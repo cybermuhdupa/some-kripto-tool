@@ -1,4 +1,5 @@
 from utils import vvv
+from Crypto.Util.number import inverse, isPrime
 
 def gcd(a, b):
     vvv(a)

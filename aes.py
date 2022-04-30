@@ -8,8 +8,8 @@ import inspect, re
 # notes: block length = 16 bytes
 # key length = 16 bytes
 # if first byte is zero, then we should add it manually to pass the assertion
-plaintext = 0x0123456789abcdeffedcba9876543210
-key = 0x0f1571c947d9e8590cb7add6af7f6798
+plaintext = 0x5A6C730ABCFED7712300784901234567
+key = 0x13AE78063E9244ED5AD45689BCB01234
 
 plaintext = long_to_bytes(plaintext)
 key = long_to_bytes(key)
@@ -155,9 +155,10 @@ def mix_columns(s):
     res_transpose = [get_w(res, i) for i in range(4)]
     return res_transpose
 
-for i in range(1, 3):
+for i in range(1, 2):
     print('round:', i)
     start_round = xormatrix(state, round_key)
+
     printmatrix(start_round)
     
     after_subbytes = sub_bytes(start_round)
@@ -166,9 +167,12 @@ for i in range(1, 3):
     after_shiftrows = shift_rows(after_subbytes)
     printmatrix(after_shiftrows)
 
-    after_mixcolumns = mix_columns(after_shiftrows)
-    printmatrix(after_mixcolumns)
-    state = after_mixcolumns
+    if i < 10:
+        after_mixcolumns = mix_columns(after_shiftrows)
+        printmatrix(after_mixcolumns)
+        state = after_mixcolumns
+    else:
+        state = after_shiftrows
 
     print('calculate round key %d ...' % i)
 
@@ -192,3 +196,5 @@ for i in range(1, 3):
         print(bbb(get_w(round_key, j % 4)))
     vvv()
 
+add_round_key = xormatrix(state, round_key)
+printmatrix(add_round_key)

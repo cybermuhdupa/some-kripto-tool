@@ -104,13 +104,13 @@ def generate_points():
                 vvv(ans)
 
 
-p = 23
+p = 13
 a = 1
 b = 1
 assert 4 * (a ** 3) + 27 * (b ** 2) != 0
 E = lambda x : (x**3 + a*x + b) % p
-P = Point(3, 10)
-Q = Point(3, 10)
+P = Point(10, 7)
+Q = Point(5, 12)
 
-#point_addition(P, Q)
+point_addition(P, Q)
 #generate_points()
